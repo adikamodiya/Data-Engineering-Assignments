@@ -26,7 +26,7 @@ targets:
       host: https://dbc-2bd5e4bd-405a.cloud.databricks.com
     variables:
       catalog: dev
-      schema: dev
+      schema: bronze
   prod:
     mode: production
     workspace:
@@ -34,8 +34,8 @@ targets:
       # We explicitly deploy to /Workspace/Users/d96d1ee0-ac8a-415c-9d26-f982765a6e1b to make sure we only have a single copy.
       root_path: /Workspace/Users/d96d1ee0-ac8a-415c-9d26-f982765a6e1b/.bundle/${bundle.name}/${bundle.target}
     variables:
-      catalog: dev
-      schema: prod
+      catalog: prod
+      schema: bronze
     permissions:
       - service_principal_name: d96d1ee0-ac8a-415c-9d26-f982765a6e1b
         level: CAN_MANAGE
