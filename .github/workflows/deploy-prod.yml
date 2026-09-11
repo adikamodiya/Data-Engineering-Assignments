@@ -1,0 +1,28 @@
+name: Deploy Databricks Bundle to Prod
+
+on:
+  push:
+    branches:
+      - main-2  # Jab main-2 me merge ho tabhi chalega
+
+permissions:
+  contents: read
+  id-token: write  # OIDC Authentication ke liye MUST condition
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Deploy Bundle to Prod via OIDC
+        working-directory: ./day_9_Q_6_bundle/my_project
+        env:
+            DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+            # OIDC authentication uses GitHub's id-token directly without storing secret PATs
+        run: |
+          databricks bundle deploy --target prod
