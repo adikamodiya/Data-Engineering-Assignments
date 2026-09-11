@@ -37,5 +37,5 @@ targets:
       catalog: prod
       schema: bronze
     permissions:
-      - service_principal_name: d96d1ee0-ac8a-415c-9d26-f982765a6e1b
+      - service_principal_name: 0c28e675-641f-49ef-81a9-b5625f2257b4
         level: CAN_MANAGE
