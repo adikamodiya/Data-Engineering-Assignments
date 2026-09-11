@@ -37,5 +37,5 @@ targets:
       catalog: prod
       schema: bronze
     permissions:
-      - service_principal_name: 0c28e675-641f-49ef-81a9-b5625f2257b4
+      - service_principal_name: github-action
         level: CAN_MANAGE
