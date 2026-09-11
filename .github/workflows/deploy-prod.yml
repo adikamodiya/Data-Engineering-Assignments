@@ -3,11 +3,11 @@ name: Deploy Databricks Bundle to Prod
 on:
   push:
     branches:
-      - main-2  # Jab main-2 me merge ho tabhi chalega
+      - main-2
 
 permissions:
   contents: read
-  id-token: write  # OIDC Authentication ke liye MUST condition
+  id-token: write  # OIDC identity token requirement
 
 jobs:
   deploy-prod:
@@ -19,10 +19,11 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Deploy Bundle to Prod via OIDC
+      - name: Deploy Databricks Bundle
         working-directory: ./day_9_Q_6_bundle/my_project
         env:
-            DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-            # OIDC authentication uses GitHub's id-token directly without storing secret PATs
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
         run: |
           databricks bundle deploy --target prod
