@@ -22,11 +22,11 @@
       }
     },
     {
-      "name": "4f7ade73",
-      "displayName": "customer_type",
+      "name": "d541f4d3",
+      "displayName": "sales_total_revenue",
       "config": {
         "version": "1.1",
-        "source": "dev.gold.customer_type",
+        "source": "dev.gold.sales_total_revenue",
         "dimensions": [
           {
             "expr": "source.*"
@@ -43,11 +43,11 @@
       }
     },
     {
-      "name": "d541f4d3",
-      "displayName": "sales_total_revenue",
+      "name": "071437b5",
+      "displayName": "sales_yoy_growth",
       "config": {
         "version": "1.1",
-        "source": "dev.gold.sales_total_revenue",
+        "source": "dev.gold.sales_yoy_growth",
         "dimensions": [
           {
             "expr": "source.*"
@@ -196,8 +196,85 @@
           },
           "position": {
             "x": 6,
-            "y": 2,
+            "y": 1,
             "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "revenue-per-year",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "071437b5",
+                  "fields": [
+                    {
+                      "name": "sale_year",
+                      "expression": "`sale_year`"
+                    },
+                    {
+                      "name": "sum(total_amount)",
+                      "expression": "SUM(`total_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Revenue per year",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "annotations": [
+                {
+                  "type": "horizontal-line",
+                  "encodings": {
+                    "y": {
+                      "dataValue": "39000000",
+                      "dataType": "DECIMAL"
+                    }
+                  }
+                }
+              ],
+              "mark": {
+                "marker": {
+                  "shape": "circle"
+                }
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "sale_year",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_amount)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 7,
+            "width": 7,
             "height": 6
           }
         }
