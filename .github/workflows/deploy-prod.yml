@@ -1,4 +1,4 @@
-name: Deploy Databricks Bundle to Prod
+name: Deploy Databricks Bundle to main-2
 
 on:
   push:
